@@ -1,0 +1,230 @@
+body {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    font-family: "Ruwudu", serif;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    background-color: #f1f1f1;
+}
+.main-content,
+.this-week-forecast,
+.side-bar-content {
+    background-color: #fff;
+    border-radius: 15px;
+}
+.header {
+    display: flex;
+    background-color: rgba(27, 24, 24, 0.85);
+    height: 70px;
+    color: #fff;
+    justify-content: space-between;
+    padding: 5px 40px;
+    align-items: center;
+}
+.header h2 {
+    margin-top: 35px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1.8rem;
+}
+.header h2 > img {
+    height: 50px;
+}
+.header > input[type="search"] {
+    height: 40px;
+    width: 350px;
+    border-radius: 15px;
+    padding: 10px 10px 0;
+}
+.header > input[type="search"],
+.header > input[type="checkbox"] {
+    border: none;
+    appearance: none;
+    outline: none;
+    font-size: 17px;
+    font-family: inherit;
+}
+.header > img {
+    height: 25px;
+    position: absolute;
+    right: 440px;
+    cursor: pointer;
+}
+.header > input[type="checkbox"] {
+    width: 60px;
+    padding: 13px 0;
+    background-color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.header > span {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    position: absolute;
+    right: 79px;
+    background-color: #003566;
+    cursor: pointer;
+}
+.header > span::after {
+    content: "C";
+    position: absolute;
+    top: 3px;
+    left: 6px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+.header > span::before {
+    content: "F";
+    position: absolute;
+    top: 3px;
+    left: 40px;
+    font-size: 1.2rem;
+    color: #000;
+    cursor: pointer;
+}
+.header > input[type="checkbox"]:checked {
+    background-color: #003566;
+}
+.header > input[type="checkbox"]:checked + span {
+    right: 45px;
+    background-color: #fff;
+}
+.header > input[type="checkbox"]:checked + span::after {
+    left: -30px;
+}
+.header > input[type="checkbox"]:checked + span::before {
+    left: 8px;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 65% 35%;
+    padding: 20px 110px;
+    gap: 25px;
+}
+.main-content {
+    display: flex;
+    flex-direction: column;
+}
+.current-weather {
+    display: flex;
+    flex-grow: 1;
+    padding: 5px 20px;
+    justify-content: space-between;
+    background-image: url(./icons/partly-cloud.jpg);
+    height: 200px;
+    background-size: cover;
+    background-color: black;
+    object-fit: cover;
+}
+.current-weather > div:first-child > p:first-child {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1.7rem;
+    margin-bottom: 0;
+}
+.current-weather p > img {
+    height: 28px;
+    width: auto;
+    transform: translateY(-29%);
+}
+.current-weather > div:first-child > p:last-of-type {
+    margin-top: -18px;
+    color: #000000bd;
+    margin-left: 10px;
+}
+.current-weather h1 {
+    font-size: 5rem;
+    margin: 40px 4px 4px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+h1 > img {
+    height: 65px;
+    transform: translateY(-30%);
+    backdrop-filter: blur(1px);
+    background-color: transparent;
+    width: auto;
+}
+.current-weather h2 {
+    font-size: 2.3rem;
+    margin-bottom: 0;
+}
+.current-weather div:last-child p {
+    font-size: 1.2rem;
+}
+.hourly-weather-forecast {
+    display: flex;
+    overflow-x: scroll;
+    padding: 20px;
+    gap: 15px;
+}
+.hourly-weather-forecast > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px dotted gray;
+    padding-right: 15px;
+}
+.hourly-weather-forecast p > img,
+.this-week-forecast p > img {
+    height: 18px;
+    transform: translateY(15%);
+}
+.this-week-forecast p:not(2),
+.hourly-weather-forecast p:last-child {
+    display: inline-flex;
+    align-items: center;
+}
+.side-bar-content {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 30px;
+}
+.side-bar-content > div {
+    display: flex;
+    justify-content: space-between;
+}
+.side-bar-content p > img {
+    height: 20px;
+}
+.side-bar-content div p:first-of-type {
+    display: inline-flex;
+    gap: 10px;
+}
+.side-bar-content div p {
+    font-size: 18px;
+}
+.this-week-forecast {
+    display: flex;
+    grid-column: span 2;
+    padding: 20px;
+}
+.this-week-forecast > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px dotted gray;
+    margin: 0;
+    padding-right: 10px;
+    flex-grow: 1;
+}
+.this-week-forecast > div:last-child,
+.hourly-weather-forecast > div:last-child {
+    border: none;
+}
+.hourly-weather-forecast p:first-of-type,
+.this-week-forecast p:first-of-type {
+    font-size: 1.2rem;
+    font-weight: 500;
+}

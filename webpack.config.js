@@ -17,15 +17,19 @@ module.exports = {
                 type: "asset/resource",
             },
             {
-                test: /\.html/i,
+                test: /\.html$/i,
                 use: "html-loader",
+            },
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"],
             },
         ],
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: "./src/index.html",
-            filename: "index.[contenthash].html",
+            filename: "index.html",
         }),
     ],
 };
