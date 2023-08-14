@@ -206,10 +206,12 @@ body {
     display: flex;
     flex-direction: column;
     padding: 10px 30px;
+    gap: -5px;
 }
 .side-bar-content > div {
     display: flex;
     justify-content: space-between;
+    height: 60px;
 }
 .side-bar-content p > img {
     height: 20px;
