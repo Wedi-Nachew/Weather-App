@@ -143,21 +143,24 @@ body {
     margin-left: 10px;
 }
 .current-weather-icon {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-top: -60px;
     display: flex;
     align-items: center;
 }
 .current-weather-icon img {
     height: 68px;
-    transform: translateY(-30%);
-    backdrop-filter: blur(1px);
+    /* transform: translateY(-30%); */
+    backdrop-filter: blur(3px);
     background-color: transparent;
     width: auto;
 }
 .current-weather-icon h1 {
-    font-weight: 300;
+    font-weight: 400;
     margin-top: 58px;
+    font-size: 3.2rem;
+    color: #000000b5;
+    backdrop-filter: blur(5px);
 }
 .current-weather h2 {
     font-size: 2.3rem;
