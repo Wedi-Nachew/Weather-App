@@ -115,7 +115,7 @@ body {
 .current-weather {
     display: flex;
     flex-grow: 1;
-    padding: 5px 20px;
+    padding: 15px 20px;
     justify-content: space-between;
     background-image: url(./icons/partly-cloud.jpg);
     height: 200px;
@@ -123,36 +123,41 @@ body {
     background-color: black;
     object-fit: cover;
 }
-.current-weather > div:first-child > p:first-child {
+.location {
     display: flex;
     align-items: center;
-    gap: 5px;
     font-size: 1.7rem;
     margin-bottom: 0;
 }
-.current-weather p > img {
+.current-weather .location > img {
     height: 28px;
     width: auto;
-    transform: translateY(-29%);
+    transform: translateY(10%);
 }
-.current-weather > div:first-child > p:last-of-type {
-    margin-top: -18px;
+.current-weather .location > p {
+    margin-bottom: 0;
+}
+.current-weather > div:first-child > p {
+    margin-top: -15px;
     color: #000000bd;
     margin-left: 10px;
 }
-.current-weather h1 {
-    font-size: 5rem;
-    margin: 40px 4px 4px;
+.current-weather-icon {
+    font-size: 3rem;
+    margin-top: -60px;
     display: flex;
     align-items: center;
-    font-weight: 500;
 }
-h1 > img {
-    height: 65px;
+.current-weather-icon img {
+    height: 68px;
     transform: translateY(-30%);
     backdrop-filter: blur(1px);
     background-color: transparent;
     width: auto;
+}
+.current-weather-icon h1 {
+    font-weight: 300;
+    margin-top: 58px;
 }
 .current-weather h2 {
     font-size: 2.3rem;
@@ -160,6 +165,10 @@ h1 > img {
 }
 .current-weather div:last-child p {
     font-size: 1.2rem;
+    margin-top: 25px;
+}
+.current-weather div:last-child p:last-child {
+    margin-top: -10px;
 }
 .hourly-weather-forecast {
     display: flex;
@@ -175,15 +184,20 @@ h1 > img {
     border-right: 1px dotted gray;
     padding-right: 15px;
 }
-.hourly-weather-forecast p > img,
-.this-week-forecast p > img {
+.hourly-chance-of-rain > img,
+.daily-chance-of-rain > img {
     height: 18px;
-    transform: translateY(15%);
+    transform: translateY(-19%);
 }
-.this-week-forecast p:not(2),
-.hourly-weather-forecast p:last-child {
+.hourly-chance-of-rain,
+.daily-chance-of-rain {
     display: inline-flex;
     align-items: center;
+}
+.hourly-weather-forecast div.hourly-chance-of-rain > p,
+.this-week-forecast div.daily-chance-of-rain > p {
+    font-size: 16px;
+    font-weight: 400;
 }
 .side-bar-content {
     display: flex;
