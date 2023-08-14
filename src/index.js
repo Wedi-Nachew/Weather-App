@@ -1,5 +1,6 @@
 import "./style.css";
-
+import { format } from "date-fns";
+import rainDrop from "./icons/rain-drop-svgrepo-com.svg";
 // key=75d0fc888d5f466b885144654231108
 // "ᵒC"
 const getCurrentWeather = async (city = "Seattle") => {
@@ -14,6 +15,7 @@ const getCurrentWeather = async (city = "Seattle") => {
     const locationDetails = parsedForecastWeather.location;
 
     console.log(forecastWeather.forecastday[0].hour);
+    // renderHourlyWeatherForecast(forecastWeather);
     // renderWeatherInfo(currentWeather, forecastWeather, locationDetails);
 };
 // city = prompt("Enter city name: ");
@@ -35,7 +37,10 @@ const renderWeatherInfo = () => {
 
         location.lastElementChild.textContent =
             locationInfo.name + ", " + locationInfo.country;
-        location.nextElementSibling.textContent = current.last_updated;
+        location.nextElementSibling.textContent = format(
+            new Date(current.last_updated),
+            "PPPP"
+        );
         tempAtTheMoment.firstElementChild.src = `weather_icons/${path}`;
         tempAtTheMoment.lastElementChild.textContent = current.temp_c + " ᵒC";
         weatherDescription.textContent = current.condition.text;
@@ -52,24 +57,36 @@ const renderWeatherInfo = () => {
         const hourlyWeatherForcast = document.querySelector(
             ".hourly-weather-forecast"
         );
-        const hourlyWeatherForcastBoards = Array.from(
-            hourlyWeatherForcast.children
-        );
+        while (hourlyWeatherForcast.firstChild) {
+            hourlyWeatherForcast.removeChild(hourlyWeatherForcast.firstChild);
+        }
+        future.forecastday[0].hour.forEach((hour) => {
+            const mainContainer = document.createElement("div");
+            const time = document.createElement("p");
+            const predicatedTempIcon = document.createElement("img");
+            const predicatedTemp = document.createElement("p");
+            const subContainer = document.createElement("div");
+            const rainDropIcon = document.createElement("img");
+            const rainingProbablity = document.createElement("p");
+            const path =
+                hour.condition.icon.match(/\w+(?=.\d+.png$)/) +
+                "/" +
+                hour.condition.icon.match(/\d+.png$/);
 
-        hourlyWeatherForcastBoards.forEach((div) => {
-            console.log();
+            time.textContent = format(new Date(hour.time), "h aa");
+            predicatedTempIcon.src = `weather_icons/${path}`;
+            predicatedTemp.textContent = hour.temp_c + " ᵒC";
+            subContainer.className = "hourly-chance-of-rain";
+            rainDropIcon.src = rainDrop;
+            rainingProbablity.textContent = hour.chance_of_rain + "%";
+
+            subContainer.appendChild(rainDropIcon);
+            subContainer.appendChild(rainingProbablity);
+            mainContainer.appendChild(time);
+            mainContainer.appendChild(predicatedTempIcon);
+            mainContainer.appendChild(predicatedTemp);
+            mainContainer.appendChild(subContainer);
+            hourlyWeatherForcast.appendChild(mainContainer);
         });
     };
-};
-const renderHourlyWeatherForecast = (future) => {
-    const hourlyWeatherForcast = document.querySelector(
-        ".hourly-weather-forecast"
-    );
-    const hourlyWeatherForcastBoards = Array.from(
-        hourlyWeatherForcast.children
-    );
-
-    hourlyWeatherForcastBoards.forEach((div) => {
-        console.log();
-    });
 };
