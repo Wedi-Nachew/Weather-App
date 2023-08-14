@@ -20,14 +20,14 @@ export const renderCurrentWeatherInfo = (current, future, locationInfo) => {
         "PPPP"
     );
     tempAtTheMoment.firstElementChild.src = `weather_icons/${path}`;
-    tempAtTheMoment.lastElementChild.textContent = current.temp_c + " ᵒC";
+    tempAtTheMoment.lastElementChild.textContent = current.temp_c + "ᵒ";
     weatherDescription.textContent = current.condition.text;
     weatherDescription.nextElementSibling.firstElementChild.textContent =
-        current.feelslike_c + " ᵒC";
+        current.feelslike_c + "ᵒ";
     weatherDescription.nextElementSibling.nextElementSibling.textContent =
         future.forecastday[0].day.mintemp_c +
-        " ᵒC" +
+        "ᵒ" +
         " / " +
         future.forecastday[0].day.maxtemp_c +
-        " ᵒC";
+        "ᵒ";
 };

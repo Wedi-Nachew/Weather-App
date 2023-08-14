@@ -22,7 +22,7 @@ export const renderHourlyWeatherForecast = (future) => {
 
         time.textContent = format(new Date(hour.time), "h aa");
         predicatedTempIcon.src = `weather_icons/${path}`;
-        predicatedTemp.textContent = hour.temp_c + " ᵒC";
+        predicatedTemp.textContent = hour.temp_c + "ᵒ";
         subContainer.className = "hourly-chance-of-rain";
         rainDropIcon.src = rainDrop;
         rainingProbablity.textContent = hour.chance_of_rain + "%";

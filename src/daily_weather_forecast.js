@@ -27,7 +27,7 @@ export const renderDailyWeatherForecastForsevenDays = (future) => {
         rainingProbablity.textContent = day.day.daily_chance_of_rain + "%";
         predicatedTempIcon.src = `weather_icons/${path}`;
         predicatedMinMaxTemp.textContent =
-            day.day.mintemp_c + " ᵒC" + " / " + day.day.maxtemp_c + " ᵒC";
+            day.day.mintemp_c + "ᵒ " + " / " + day.day.maxtemp_c + "ᵒ";
 
         subContainer.appendChild(rainDropIcon);
         subContainer.appendChild(rainingProbablity);

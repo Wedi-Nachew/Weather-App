@@ -19,10 +19,19 @@ const getCurrentWeather = async (city = "Seattle") => {
     const forecastWeather = parsedForecastWeather.forecast;
     const locationDetails = parsedForecastWeather.location;
 
-    // renderDailyWeatherForecastForsevenDays(forecastWeather);
-    //  provideExtraInfo(currentWeather, forecastWeather, locationDetails);
-    // renderHourlyWeatherForecast(forecastWeather);
-    // renderCurrentWeatherInfo(currentWeather, forecastWeather, locationDetails);
+    renderDailyWeatherForecastForsevenDays(forecastWeather);
+    provideExtraInfo(currentWeather, forecastWeather, locationDetails);
+    renderHourlyWeatherForecast(forecastWeather);
+    renderCurrentWeatherInfo(currentWeather, forecastWeather, locationDetails);
 };
-// city = prompt("Enter city name: ");
-getCurrentWeather("paris");
+
+getCurrentWeather("denver");
+
+const getUserSearchLocation = () => {
+    const searchIcon = document.querySelector(".magnifying-glass");
+    searchIcon.addEventListener("click", () => {
+        getCurrentWeather(searchIcon.previousElementSibling.value);
+        searchIcon.previousElementSibling.value = "";
+    });
+};
+getUserSearchLocation();
