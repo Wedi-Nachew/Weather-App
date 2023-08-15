@@ -32,8 +32,6 @@ const getCurrentWeather = async (city = "Seattle") => {
     renderDailyWeatherForecastForsevenDays(forecastWeather);
 };
 
-getCurrentWeather("denver");
-
 const getUserSearchLocation = () => {
     const searchIcon = document.querySelector(".magnifying-glass");
     searchIcon.addEventListener("click", () => {
@@ -41,15 +39,11 @@ const getUserSearchLocation = () => {
         searchIcon.previousElementSibling.value = "";
     });
 };
-getUserSearchLocation();
+
 const setWeatherDescribingBackground = (condition) => {
     const currentWeather = document.querySelector(".current-weather");
     if (/rain/i.test(condition) && /storm/i.test(condition)) {
         currentWeather.style.cssText = `background-image: url(${stormyRain})`;
-        // } else if (/cloud/i.test(condition) && /partly/i.test(condition)) {
-        //     currentWeather.style.cssText = `background-image: url(${partlyCloud})`;
-        // } else if (/clear/i.test(condition) || /sunny/i.test(condition)) {
-        //     currentWeather.style.cssText = `background-image: url(${clearSky})`;
     } else if (/cloud/i.test(condition) || /overcast/i.test(condition)) {
         currentWeather.style.cssText = `background-image: url(${cloudy})`;
     } else if (/rain/i.test(condition)) {
@@ -58,3 +52,16 @@ const setWeatherDescribingBackground = (condition) => {
         currentWeather.style.cssText = `background-image: url(${partlyCloud})`;
     }
 };
+
+const changeTempUnit = () => {
+    const checkBox = document.querySelector("[type='checkbox']");
+
+    checkBox.addEventListener("click", () => {
+        checkBox.checked ? console.log("fahrenheit") : console.log("celcious");
+    });
+    // console.log(checkBox.)
+};
+
+getCurrentWeather("denver");
+getUserSearchLocation();
+changeTempUnit();

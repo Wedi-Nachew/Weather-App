@@ -24,6 +24,7 @@ body {
     justify-content: space-between;
     padding: 5px 40px;
     align-items: center;
+    position: relative;
 }
 .header h2 {
     margin-top: 35px;
@@ -57,49 +58,55 @@ body {
 }
 .header > input[type="checkbox"] {
     width: 60px;
-    padding: 13px 0;
-    background-color: #fff;
+    padding: 10px 0;
+    background-color: #d4d4d4;
     border-radius: 20px;
     cursor: pointer;
 }
-.header > span {
-    height: 25px;
-    width: 25px;
+.header > span.circular-shape {
+    height: 23px;
+    width: 23px;
     border-radius: 50%;
     position: absolute;
-    right: 77px;
-    background-color: #003566;
+    right: 75px;
+    background-color: #fff;
     cursor: pointer;
+    border: 3px solid #d4d4d4;
 }
-.header > span::after {
-    content: "C";
+.header > span.C {
     position: absolute;
-    top: 3px;
-    left: 7px;
-    font-size: 1.2rem;
+    top: 32px;
+    left: 88.9%;
+    font-size: 1rem;
     cursor: pointer;
+    color: #171313df;
+    z-index: 10;
 }
-.header > span::before {
-    content: "F";
+.header > span.F {
     position: absolute;
-    top: 3px;
-    left: 40px;
-    font-size: 1.2rem;
+    top: 31px;
+    left: 93%;
+    font-size: 1rem;
     color: #000;
     cursor: pointer;
+    z-index: 10;
 }
 .header > input[type="checkbox"]:checked {
-    background-color: #003566;
+    background-color: rgba(12, 182, 12, 0.951);
 }
-.header > input[type="checkbox"]:checked + span {
-    right: 45px;
+.header > input[type="checkbox"]:checked ~ span.circular-shape {
+    right: 37px;
     background-color: #fff;
+    border: 3px solid rgba(12, 182, 12, 0.951);
 }
-.header > input[type="checkbox"]:checked + span::after {
-    left: -30px;
+.header > input[type="checkbox"]:checked ~ span.F {
+    left: 93.3%;
+    /* color: #fff; */
 }
-.header > input[type="checkbox"]:checked + span::before {
-    left: 8px;
+.header > input[type="checkbox"]:checked + span.C {
+    left: 88.8%;
+    color: #fff;
+    top: 31px;
 }
 .wrapper {
     display: grid;
