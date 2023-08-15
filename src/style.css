@@ -76,7 +76,7 @@ body {
 .header > span.C {
     position: absolute;
     top: 32px;
-    left: 88.9%;
+    right: 82.5px;
     font-size: 1rem;
     cursor: pointer;
     color: #171313df;
@@ -85,7 +85,7 @@ body {
 .header > span.F {
     position: absolute;
     top: 31px;
-    left: 93%;
+    right: 47.5px;
     font-size: 1rem;
     color: #000;
     cursor: pointer;
@@ -100,11 +100,10 @@ body {
     border: 3px solid rgba(12, 182, 12, 0.951);
 }
 .header > input[type="checkbox"]:checked ~ span.F {
-    left: 93.3%;
-    /* color: #fff; */
+    right: 45px;
 }
 .header > input[type="checkbox"]:checked + span.C {
-    left: 88.8%;
+    right: 80px;
     color: #fff;
     top: 31px;
 }
@@ -121,7 +120,7 @@ body {
 .current-weather {
     display: flex;
     flex-grow: 1;
-    padding: 15px 20px;
+    padding: 15px 10px;
     justify-content: space-between;
     background-image: url(./icons/partly-cloud.jpg);
     height: 200px;
@@ -162,14 +161,19 @@ body {
 .current-weather .current-weather-icon h1 {
     font-weight: 500;
     margin-top: 60px;
-    font-size: 2.8rem;
+    font-size: 3.1rem;
     color: #000000ca;
-    /* backdrop-filter: blur(5px); */
 }
 .current-weather h2 {
-    font-size: 2.3rem;
+    font-size: 1.8rem;
     margin-bottom: 0;
     font-weight: 500;
+    color: #000000da;
+    margin-top: 33px;
+    width: clamp(4ch, 10ch, 17ch);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .current-weather div:last-child p {
     font-size: 1.2rem;

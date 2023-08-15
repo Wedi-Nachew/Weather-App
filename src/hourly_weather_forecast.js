@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import rainDrop from "./icons/rain-drop-svgrepo-com.svg";
-export const renderHourlyWeatherForecast = (future) => {
+
+export const renderHourlyWeatherForecast = (future, unit) => {
     const hourlyWeatherForcast = document.querySelector(
         ".hourly-weather-forecast"
     );
@@ -22,10 +23,13 @@ export const renderHourlyWeatherForecast = (future) => {
 
         time.textContent = format(new Date(hour.time), "h aa");
         predicatedTempIcon.src = `weather_icons/${path}`;
-        predicatedTemp.textContent = hour.temp_c + "ᵒ";
         subContainer.className = "hourly-chance-of-rain";
         rainDropIcon.src = rainDrop;
         rainingProbablity.textContent = hour.chance_of_rain + "%";
+
+        unit === "Fahrenheit"
+            ? (predicatedTemp.textContent = hour.temp_f + "ᵒ")
+            : (predicatedTemp.textContent = hour.temp_c + "ᵒ");
 
         subContainer.appendChild(rainDropIcon);
         subContainer.appendChild(rainingProbablity);

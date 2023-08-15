@@ -10,8 +10,10 @@ import { renderHourlyWeatherForecast } from "./hourly_weather_forecast";
 import { provideExtraInfo } from "./side_bar_notes";
 // key=75d0fc888d5f466b885144654231108
 // "ᵒC"
+let unit = "Celsius";
+let city = "Seattle";
 
-const getCurrentWeather = async (city = "Seattle") => {
+const getCurrentWeather = async (city) => {
     const forecastWeatherResponse = await fetch(
         `https://api.weatherapi.com/v1/forecast.json?key=75d0fc888d5f466b885144654231108&q=${city}&days=7&aqi=no&alerts=no`,
         { mode: "cors" }
@@ -24,18 +26,24 @@ const getCurrentWeather = async (city = "Seattle") => {
     const currentWeather = parsedForecastWeather.current;
     const forecastWeather = parsedForecastWeather.forecast;
     const locationDetails = parsedForecastWeather.location;
-    // console.log(/clear/i.test(currentWeather.condition.text));
-    setWeatherDescribingBackground(currentWeather.condition.text);
-    renderCurrentWeatherInfo(currentWeather, forecastWeather, locationDetails);
+
+    renderCurrentWeatherInfo(
+        currentWeather,
+        forecastWeather,
+        locationDetails,
+        unit
+    );
     provideExtraInfo(currentWeather, forecastWeather, locationDetails);
-    renderHourlyWeatherForecast(forecastWeather);
-    renderDailyWeatherForecastForsevenDays(forecastWeather);
+    renderHourlyWeatherForecast(forecastWeather, unit);
+    renderDailyWeatherForecastForsevenDays(forecastWeather, unit);
 };
 
 const getUserSearchLocation = () => {
     const searchIcon = document.querySelector(".magnifying-glass");
+
     searchIcon.addEventListener("click", () => {
-        getCurrentWeather(searchIcon.previousElementSibling.value);
+        city = searchIcon.previousElementSibling.value;
+        getCurrentWeather(city, unit);
         searchIcon.previousElementSibling.value = "";
     });
 };
@@ -55,13 +63,34 @@ const setWeatherDescribingBackground = (condition) => {
 
 const changeTempUnit = () => {
     const checkBox = document.querySelector("[type='checkbox']");
+    const circularSwitch = document.querySelector(".circular-shape");
+    checkBox.checked = false;
 
-    checkBox.addEventListener("click", () => {
-        checkBox.checked ? console.log("fahrenheit") : console.log("celcious");
-    });
-    // console.log(checkBox.)
+    const clickEvents = () => {
+        checkBox.addEventListener("click", () => {
+            if (checkBox.checked) {
+                unit = "Fahrenheit";
+            } else {
+                unit = "Celsius";
+            }
+            getCurrentWeather(city, unit);
+        });
+        circularSwitch.addEventListener("click", () => {
+            checkBox.click();
+        });
+        circularSwitch.nextElementSibling.addEventListener("click", () => {
+            checkBox.click();
+        });
+        circularSwitch.previousElementSibling.addEventListener("click", () => {
+            checkBox.click();
+        });
+    };
+
+    clickEvents();
 };
 
-getCurrentWeather("denver");
-getUserSearchLocation();
-changeTempUnit();
+document.addEventListener("DOMContentLoaded", () => {
+    getCurrentWeather(city);
+    getUserSearchLocation();
+    changeTempUnit();
+});

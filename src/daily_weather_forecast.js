@@ -1,6 +1,7 @@
 import { format, isToday } from "date-fns";
 import rainDrop from "./icons/rain-drop-svgrepo-com.svg";
-export const renderDailyWeatherForecastForsevenDays = (future) => {
+
+export const renderDailyWeatherForecastForsevenDays = (future, unit) => {
     const thisWeekForecast = document.querySelector(".this-week-forecast");
     while (thisWeekForecast.firstChild) {
         thisWeekForecast.removeChild(thisWeekForecast.firstChild);
@@ -26,8 +27,12 @@ export const renderDailyWeatherForecastForsevenDays = (future) => {
         rainDropIcon.src = rainDrop;
         rainingProbablity.textContent = day.day.daily_chance_of_rain + "%";
         predicatedTempIcon.src = `weather_icons/${path}`;
-        predicatedMinMaxTemp.textContent =
-            day.day.mintemp_c + "ᵒ " + " / " + day.day.maxtemp_c + "ᵒ";
+
+        unit === "Fahrenheit"
+            ? (predicatedMinMaxTemp.textContent =
+                  day.day.mintemp_f + "ᵒ " + " / " + day.day.maxtemp_f + "ᵒ")
+            : (predicatedMinMaxTemp.textContent =
+                  day.day.mintemp_c + "ᵒ " + " / " + day.day.maxtemp_c + "ᵒ");
 
         subContainer.appendChild(rainDropIcon);
         subContainer.appendChild(rainingProbablity);

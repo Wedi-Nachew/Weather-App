@@ -1,5 +1,10 @@
 import { format } from "date-fns";
-export const renderCurrentWeatherInfo = (current, future, locationInfo) => {
+export const renderCurrentWeatherInfo = (
+    current,
+    future,
+    locationInfo,
+    unit
+) => {
     const wrapper = document.querySelector(".wrapper");
     const currentWeatherBoard = wrapper.querySelector(".current-weather");
     const location = currentWeatherBoard.querySelector(".location");
@@ -19,15 +24,31 @@ export const renderCurrentWeatherInfo = (current, future, locationInfo) => {
         new Date(current.last_updated),
         "PPPP"
     );
-    tempAtTheMoment.firstElementChild.src = `weather_icons/${path}`;
-    tempAtTheMoment.lastElementChild.textContent = current.temp_c + "ᵒ";
     weatherDescription.textContent = current.condition.text;
-    weatherDescription.nextElementSibling.firstElementChild.textContent =
-        current.feelslike_c + "ᵒ";
-    weatherDescription.nextElementSibling.nextElementSibling.textContent =
-        future.forecastday[0].day.mintemp_c +
-        "ᵒ" +
-        " / " +
-        future.forecastday[0].day.maxtemp_c +
-        "ᵒ";
+    tempAtTheMoment.firstElementChild.src = `weather_icons/${path}`;
+    unit === "Fahrenheit" ? dataInFahrenheit() : dataInCelsius();
+
+    function dataInCelsius() {
+        tempAtTheMoment.lastElementChild.textContent = current.temp_c + "ᵒ";
+        weatherDescription.nextElementSibling.firstElementChild.textContent =
+            current.feelslike_c + "ᵒ";
+        weatherDescription.nextElementSibling.nextElementSibling.textContent =
+            future.forecastday[0].day.mintemp_c +
+            "ᵒ" +
+            " / " +
+            future.forecastday[0].day.maxtemp_c +
+            "ᵒ";
+    }
+    function dataInFahrenheit() {
+        tempAtTheMoment.lastElementChild.textContent = current.temp_f + "ᵒ";
+
+        weatherDescription.nextElementSibling.firstElementChild.textContent =
+            current.feelslike_f + "ᵒ";
+        weatherDescription.nextElementSibling.nextElementSibling.textContent =
+            future.forecastday[0].day.mintemp_f +
+            "ᵒ" +
+            " / " +
+            future.forecastday[0].day.maxtemp_f +
+            "ᵒ";
+    }
 };
