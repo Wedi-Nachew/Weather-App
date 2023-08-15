@@ -148,7 +148,7 @@ body {
 }
 .current-weather-icon img {
     height: 68px;
-    backdrop-filter: blur(3px);
+    /* backdrop-filter: blur(3px); */
     background-color: transparent;
     width: auto;
 }
@@ -157,7 +157,7 @@ body {
     margin-top: 60px;
     font-size: 2.8rem;
     color: #000000ca;
-    backdrop-filter: blur(5px);
+    /* backdrop-filter: blur(5px); */
 }
 .current-weather h2 {
     font-size: 2.3rem;
