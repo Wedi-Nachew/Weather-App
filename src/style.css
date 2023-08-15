@@ -19,7 +19,7 @@ body {
 .header {
     display: flex;
     background-color: rgba(27, 24, 24, 0.85);
-    height: 70px;
+    height: 75px;
     color: #fff;
     justify-content: space-between;
     padding: 5px 40px;
@@ -36,29 +36,31 @@ body {
 .header h2 > img {
     height: 50px;
 }
-.header > input[type="search"] {
-    height: 40px;
-    width: 320px;
-    border-radius: 15px;
-    padding: 10px 10px 0;
-}
+
 .header > input[type="search"],
 .header > input[type="checkbox"] {
     border: none;
     appearance: none;
     outline: none;
-    font-size: 17px;
-    font-family: inherit;
+    font-size: 100%;
+    font-family: "Times New Roman", Times, serif;
+}
+.header > input[type="search"] {
+    height: 32px;
+    width: 350px;
+    border-radius: 15px;
+    padding: 10px;
 }
 .header > img {
-    height: 25px;
+    height: 22px;
     position: absolute;
-    right: 33.3%;
+    left: 66.3%;
     cursor: pointer;
 }
 .header > img:hover {
     transform: scale(0.9);
 }
+
 .header > input[type="checkbox"] {
     width: 60px;
     padding: 10px 0;
@@ -78,8 +80,8 @@ body {
 }
 .header > span.C {
     position: absolute;
-    top: 32px;
-    right: 82.5px;
+    top: 33px;
+    right: 83.5px;
     font-size: 1rem;
     cursor: pointer;
     color: #171313df;
@@ -87,7 +89,7 @@ body {
 }
 .header > span.F {
     position: absolute;
-    top: 31px;
+    top: 33px;
     right: 47.5px;
     font-size: 1rem;
     color: #000;
@@ -106,9 +108,15 @@ body {
     right: 45px;
 }
 .header > input[type="checkbox"]:checked + span.C {
-    right: 80px;
+    right: 82px;
     color: #fff;
-    top: 31px;
+    top: 33px;
+}
+.header > .error-handler {
+    position: absolute;
+    left: 43.5%;
+    bottom: -20px;
+    z-index: 99;
 }
 .wrapper {
     display: grid;

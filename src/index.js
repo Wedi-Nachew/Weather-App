@@ -10,42 +10,47 @@ import { renderDailyWeatherForecastForsevenDays } from "./daily_weather_forecast
 import { renderCurrentWeatherInfo } from "./current_weather";
 import { renderHourlyWeatherForecast } from "./hourly_weather_forecast";
 import { provideExtraInfo } from "./side_bar_notes";
-// key=75d0fc888d5f466b885144654231108
-// "ᵒC"
+
 let unit = "Celsius";
 let city = "Seattle";
 
 const getCurrentWeather = async (city) => {
-    const forecastWeatherResponse = await fetch(
-        `https://api.weatherapi.com/v1/forecast.json?key=75d0fc888d5f466b885144654231108&q=${city}&days=7&aqi=no&alerts=no`,
-        { mode: "cors" }
-    );
+    const errorHandler = document.querySelector(".error-handler");
+    try {
+        const forecastWeatherResponse = await fetch(
+            `https://api.weatherapi.com/v1/forecast.json?key=75d0fc888d5f466b885144654231108&q=${city}&days=7&aqi=no&alerts=no`,
+            { mode: "cors" }
+        );
 
-    const parsedForecastWeather = await forecastWeatherResponse.json();
-    const currentWeather = parsedForecastWeather.current;
-    const forecastWeather = parsedForecastWeather.forecast;
-    const locationDetails = parsedForecastWeather.location;
+        const parsedForecastWeather = await forecastWeatherResponse.json();
+        const currentWeather = parsedForecastWeather.current;
+        const forecastWeather = parsedForecastWeather.forecast;
+        const locationDetails = parsedForecastWeather.location;
 
-    setWeatherDescribingBackground(
-        parsedForecastWeather.current.condition.text
-    );
+        setWeatherDescribingBackground(
+            parsedForecastWeather.current.condition.text
+        );
+        errorHandler.textContent = "";
+        renderCurrentWeatherInfo(
+            currentWeather,
+            forecastWeather,
+            locationDetails,
+            unit
+        );
+        provideExtraInfo(currentWeather, forecastWeather, locationDetails);
+        renderHourlyWeatherForecast(forecastWeather, unit);
+        renderDailyWeatherForecastForsevenDays(forecastWeather, unit);
+        currentWeather.temp_c
+            ? hideShowLoader("hidden")
+            : hideShowLoader("visible");
+    } catch (error) {
+        errorHandler.textContent = "⚠︎ Location not found";
+    }
     getUserSearchLocation().adjustSearchingElements(
         magnifyingGlass,
         "black",
         ""
     );
-    renderCurrentWeatherInfo(
-        currentWeather,
-        forecastWeather,
-        locationDetails,
-        unit
-    );
-    provideExtraInfo(currentWeather, forecastWeather, locationDetails);
-    renderHourlyWeatherForecast(forecastWeather, unit);
-    renderDailyWeatherForecastForsevenDays(forecastWeather, unit);
-    currentWeather.temp_c
-        ? hideShowLoader("hidden")
-        : hideShowLoader("visible");
 };
 
 const getUserSearchLocation = () => {
