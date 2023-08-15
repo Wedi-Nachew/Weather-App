@@ -170,7 +170,7 @@ body {
     font-weight: 500;
     color: #000000da;
     margin-top: 33px;
-    width: clamp(4ch, 10ch, 17ch);
+    width: clamp(4ch, 13ch, 17ch);
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
