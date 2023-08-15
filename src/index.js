@@ -116,7 +116,7 @@ const hideShowLoader = (value) => {
     loader.style.visibility = value;
 };
 document.addEventListener("DOMContentLoaded", () => {
-    getCurrentWeather("london");
+    getCurrentWeather(city);
     getUserSearchLocation();
     changeTempUnit();
 });
