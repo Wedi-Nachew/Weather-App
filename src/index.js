@@ -4,6 +4,8 @@ import cloudy from "./icons/cloudy.jpg";
 import partlyCloud from "./icons/partly-cloud.jpg";
 import rainy from "./icons/rain.jpg";
 import stormyRain from "./icons/stormy-rain.jpg";
+import spinner from "./icons/Spinner.gif";
+import magnifyingGlass from "./icons/magnifying-glass-10-svgrepo-com.svg";
 import { renderDailyWeatherForecastForsevenDays } from "./daily_weather_forecast";
 import { renderCurrentWeatherInfo } from "./current_weather";
 import { renderHourlyWeatherForecast } from "./hourly_weather_forecast";
@@ -20,13 +22,18 @@ const getCurrentWeather = async (city) => {
     );
 
     const parsedForecastWeather = await forecastWeatherResponse.json();
-    setWeatherDescribingBackground(
-        parsedForecastWeather.current.condition.text
-    );
     const currentWeather = parsedForecastWeather.current;
     const forecastWeather = parsedForecastWeather.forecast;
     const locationDetails = parsedForecastWeather.location;
 
+    setWeatherDescribingBackground(
+        parsedForecastWeather.current.condition.text
+    );
+    getUserSearchLocation().adjustSearchingElements(
+        magnifyingGlass,
+        "black",
+        ""
+    );
     renderCurrentWeatherInfo(
         currentWeather,
         forecastWeather,
@@ -36,6 +43,9 @@ const getCurrentWeather = async (city) => {
     provideExtraInfo(currentWeather, forecastWeather, locationDetails);
     renderHourlyWeatherForecast(forecastWeather, unit);
     renderDailyWeatherForecastForsevenDays(forecastWeather, unit);
+    currentWeather.temp_c
+        ? hideShowLoader("hidden")
+        : hideShowLoader("visible");
 };
 
 const getUserSearchLocation = () => {
@@ -44,8 +54,16 @@ const getUserSearchLocation = () => {
     searchIcon.addEventListener("click", () => {
         city = searchIcon.previousElementSibling.value;
         getCurrentWeather(city, unit);
-        searchIcon.previousElementSibling.value = "";
+        adjustSearchingElements(spinner, "rgba(0,0,0,.5)", city);
     });
+
+    const adjustSearchingElements = (icon, color, value) => {
+        searchIcon.src = icon;
+        searchIcon.previousElementSibling.style.color = color;
+        searchIcon.previousElementSibling.value = value;
+    };
+
+    return { adjustSearchingElements };
 };
 
 const setWeatherDescribingBackground = (condition) => {
@@ -88,9 +106,12 @@ const changeTempUnit = () => {
 
     clickEvents();
 };
-
+const hideShowLoader = (value) => {
+    const loader = document.querySelector(".loader-container");
+    loader.style.visibility = value;
+};
 document.addEventListener("DOMContentLoaded", () => {
-    getCurrentWeather(city);
+    getCurrentWeather("london");
     getUserSearchLocation();
     changeTempUnit();
 });
